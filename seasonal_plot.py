@@ -26,4 +26,3 @@ def seasonal_plot(X, y, period, freq, ax=None):
             va="center",
         )
     return ax
-        
