@@ -30,3 +30,5 @@ def plot_periodogram(ts, detrend='linear', ax=None):
     ax.set_ylabel("Variance")
     ax.set_title("Periodogram")
     return ax
+
+
