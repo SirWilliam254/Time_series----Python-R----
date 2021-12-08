@@ -13,3 +13,5 @@
  final.aic # the best AIC
  final.order # the best p and q values
  final.arma # the model emanating from the best parameters.
+
+
