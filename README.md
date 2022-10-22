@@ -1,4 +1,4 @@
-# Time_series
+# Time_series #(otexts)
 A time series is usually a sequence of data points that occur in successive order over some time, where the time interval is equal.
 ## Trend
 When data is plotted over time, we get a pattern that demonstrates how a series of numbers has moved to significantly higher or lower values over a lengthy period of time.
