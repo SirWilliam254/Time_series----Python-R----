@@ -1,7 +1,51 @@
 # Time_series #(otexts)
 A time series is usually a sequence of data points that occur in successive order over some time, where the time interval is equal.
 ## Trend
-When data is plotted over time, we get a pattern that demonstrates how a series of numbers has moved to significantly higher or lower values over a lengthy period of time.
+When data is plotted over time, we get a pattern that demonstrates how a series of numbers has moved to significantly higher or lower values over a lengthy period of time.It can be upward, downward or horizontal. The trend can be linear or non-linear and can be used to reveal long-term patterns in the data.
+
+There are several techniques for identifying and analyzing trends in time series data using Python:
+
+Visual Inspection: One of the simplest ways to identify trends in time series data is to plot the data and visually inspect the plot for patterns of long-term movements.
+
+Linear Regression: A linear regression model can be used to fit a line to the data, which can be used to identify a linear trend. The slope of the line will indicate the direction and strength of the trend.
+
+Polynomial Regression: If a linear trend is not present, a polynomial regression model can be used to fit a polynomial equation to the data, which can be used to identify a non-linear trend.
+
+Moving Averages: A moving average is a technique that can be used to smooth out short-term fluctuations in the data and reveal long-term trends.
+
+Time series models: Models such as ARIMA (Autoregressive Integrated Moving Average) and SARIMA (Seasonal ARIMA) are commonly used for time-series forecasting, where trends can be captured by introducing trend components into the model and identifying their parameters.
+
+Machine Learning models: Deep learning models, in particular, Recurrent Neural Networks (RNNs) and Long Short-Term Memory (LSTM) models are often used for time-series forecasting, in which recurrent layers with different architectures and properties can capture complex temporal dependencies, cycles, and patterns within the data, including trends.
+
+Here's an example of how to use linear regression to identify a trend in a time series data in Python:
+
+```python
+from sklearn.linear_model import LinearRegression
+import matplotlib.pyplot as plt
+
+# load data
+data = pd.read_csv('data.csv')
+
+# format the data
+data['date'] = pd.to_datetime(data['date'])
+data.set_index('date', inplace=True)
+
+# create an array of the index values
+x = np.arange(len(data)).reshape(-1, 1)
+y = data.values
+
+# fit the model
+model = LinearRegression()
+model.fit(x, y)
+
+# make predictions
+y_pred = model.predict(x)
+
+# plot the data and the trend line
+plt.figure(figsize=(12,8))
+plt.plot(data, label='Original
+```
+
 ## Seasonality
 
 Seasonality in time series data refers to patterns of regular or semi-regular fluctuations that occur at a specific time of the year, such as daily, weekly, or yearly. These patterns can be caused by various factors such as weather, economic, social or cultural conditions, and they can have a significant impact on forecasting and modeling time series data.
