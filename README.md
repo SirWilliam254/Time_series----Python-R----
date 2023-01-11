@@ -3,9 +3,74 @@ A time series is usually a sequence of data points that occur in successive orde
 ## Trend
 When data is plotted over time, we get a pattern that demonstrates how a series of numbers has moved to significantly higher or lower values over a lengthy period of time.
 ## Seasonality
+
+Seasonality in time series data refers to patterns of regular or semi-regular fluctuations that occur at a specific time of the year, such as daily, weekly, or yearly. These patterns can be caused by various factors such as weather, economic, social or cultural conditions, and they can have a significant impact on forecasting and modeling time series data.
+
+There are several techniques for identifying and removing seasonality in time series data using Python:
+
 [Removing Seasonality in a Time series](https://sirwilliam254.github.io/Time_series----Python-R----/DEseasonalizing_py.html)
 
+Decomposition: One of the most common techniques for identifying seasonality is to use decomposition methods such as seasonal decomposition of time series (STL) or classical decomposition. These methods break down a time series into its component parts: trend, seasonal, and residual. The seasonal component represents the seasonality in the data.
+
+Time series models: Models such as ARIMA (Autoregressive Integrated Moving Average) and SARIMA (Seasonal ARIMA) are commonly used for time-series forecasting, where seasonality can be captured by introducing seasonal components into the model and identifying their parameters.
+
+Machine Learning models: Deep learning models, in particular, Recurrent Neural Networks (RNNs) and Long Short-Term Memory (LSTM) models are often used for time-series forecasting, in which recurrent layers with different architectures and properties can capture complex temporal dependencies, cycles, and patterns within the data, including seasonality.
+
+Here is an example of how to use the seasonal_decompose() function from the statsmodels library to decompose a time series and remove its seasonality in Python:
+
+```python
+from statsmodels.tsa.seasonal import seasonal_decompose
+import matplotlib.pyplot as plt
+
+# load data
+data = pd.read_csv('data.csv')
+
+# format the data
+data['date'] = pd.to_datetime(data['date'])
+data.set_index('date', inplace=True)
+
+# perform seasonal decomposition
+result = seasonal_decompose(data, model='multiplicative')
+
+# extract the seasonal component
+seasonal = result.seasonal
+
+# remove the seasonal component from the original data
+data_without_seasonality = data - seasonal
+
+# plot the results
+plt.figure(figsize=(12,8))
+plt.subplot(311)
+plt.plot(data, label='Original')
+plt.legend(loc='best')
+plt.subplot(312)
+plt.plot(seasonal, label='Seasonal')
+plt.legend(loc='best')
+plt.subplot(313)
+plt.plot(data_without_seasonality, label='Without Seasonality')
+plt.legend(loc='best')
+plt.tight_layout()
+plt.show()
+
+```
+
 ## Cycles
+
+Cycles in time series data refer to patterns of regular or semi-regular fluctuations in the data that repeat over time. These patterns can have varying frequencies and amplitudes, and they can be caused by various factors such as economic, environmental, or societal influences.
+
+There are several techniques for identifying and analyzing cycles in time series data, including:
+
+Visual inspection: One of the simplest ways to identify cycles in time series data is to plot the data and visually inspect the plot for patterns of regular fluctuations.
+
+Spectral analysis: This is a mathematical technique that can be used to identify the frequencies of the different cycles present in a time series. The most common method is the Fourier Transform, it decomposes a time series into its component frequencies, but also other methods like Wavelet Transform and Periodogram can be used.
+
+Decomposition: This technique involves breaking down a time series into its component parts: trend, seasonal, and residual. This can reveal cycles in the data that correspond to the seasonal component.
+
+Time series models: ARIMA, SARIMA, Exponential smoothing and state-space models are commonly used for time-series forecasting, where cycles can be identified by examining the model parameters, in particular, the parameters that capture the dependencies between observations
+
+Machine Learning models: Deep learning models, in particular, Recurrent Neural Networks (RNNs) and Long Short-Term Memory (LSTM) models are often used for Time-series forecasting, in which recurrent layers with different architectures and properties can capture complex temporal dependencies, cycles and patterns within the data.
+
+It's important to note that cycles in time series data can be difficult to identify and analyze, as they may be caused by a combination of factors, and they may be obscured by other types of variations in the data. It's good to consult with experts in the field of time series analysis and use multiple techniques to identify and analyze cycles in your data.
 
 ## time series as a feature
 
