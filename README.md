@@ -1,5 +1,35 @@
 # Time_series #(otexts)
 A time series is usually a sequence of data points that occur in successive order over some time, where the time interval is equal.
+
+### Cleaning data
+
+```py
+import pandas as pd
+import numpy as np
+
+# Load time series data from CSV file
+df = pd.read_csv('time_series_data.csv')
+
+# Check for missing values
+print(df.isna().sum())
+
+# Fill missing values using forward fill
+df.fillna(method='ffill', inplace=True)
+
+# Detect and remove outliers using z-score
+z_scores = np.abs((df - df.mean()) / df.std())
+df = df[z_scores < 3]
+
+# Remove duplicates
+df.drop_duplicates(inplace=True)
+
+# Normalize data using min-max scaling
+df = (df - df.min()) / (df.max() - df.min())
+
+# Save cleaned data to CSV file
+df.to_csv('cleaned_time_series_data.csv', index=False)
+```
+
 ## Trend
 When data is plotted over time, we get a pattern that demonstrates how a series of numbers has moved to significantly higher or lower values over a lengthy period of time.It can be upward, downward or horizontal. The trend can be linear or non-linear and can be used to reveal long-term patterns in the data.
 
